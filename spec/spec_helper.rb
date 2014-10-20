@@ -1,2 +1,2 @@
-require_relative '../src'
+require_relative '../src/GitCreator'
 
