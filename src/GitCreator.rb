@@ -3,12 +3,15 @@ require 'git'
 require 'logger'
 
 class GitRecordCreator
+  @@Configuration_file_location = './configration/'
+  @@Confirguration_file_name = 'definitions.yaml'
   def initialize
     Dir.mkdir('./configuration') if not Dir.exists?('./configuration')
     if not git_repository_exists?
       puts "Git repo does not exist, creating"
       create_git_repository
     end
+    commit_configuration_file
   end
 
   private 
@@ -27,4 +30,8 @@ class GitRecordCreator
     @g.config('user.name', 'User')
     @g.config('user.email', 'user@user.com')
   end
+
+  def commit_configuration_file
+  end
+
 end
