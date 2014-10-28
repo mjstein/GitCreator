@@ -28,3 +28,13 @@ describe GitRecordCreator, "Git Repository" do
   end
 
 end
+
+describe GitRecordCreator, "Git commit" do
+  let(:git_record){GitRecordCreator.new.commit_configuration_file}
+  before(:all) do
+    FileUtils.rm_rf('./configuration') if Dir.exists?('./configuration')
+  end
+  it "should commit without error"
+  it "should commit with a message showing file diffs"
+  it "should commit with a message showing time and date"
+end

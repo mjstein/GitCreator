@@ -11,7 +11,11 @@ class GitRecordCreator
       puts "Git repo does not exist, creating"
       create_git_repository
     end
-    commit_configuration_file
+  end
+
+  def commit_configuration_file
+    p @g.index
+    
   end
 
   private 
@@ -31,7 +35,7 @@ class GitRecordCreator
     @g.config('user.email', 'user@user.com')
   end
 
-  def commit_configuration_file
-  end
 
 end
+
+
