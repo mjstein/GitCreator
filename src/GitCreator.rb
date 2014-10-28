@@ -3,8 +3,6 @@ require 'git'
 require 'logger'
 
 class GitRecordCreator
-  @@Configuration_file_location = './configration/'
-  @@Confirguration_file_name = 'definitions.yaml'
   def initialize
     Dir.mkdir('./configuration') if not Dir.exists?('./configuration')
     if not git_repository_exists?
@@ -14,8 +12,10 @@ class GitRecordCreator
   end
 
   def commit_configuration_file
-    p @g.index
-    
+    config_file = 'config.yaml'
+     configuration_file_exists?(config_file) 
+      commit_file(config_file) 
+  return true
   end
 
   private 
@@ -35,7 +35,24 @@ class GitRecordCreator
     @g.config('user.email', 'user@user.com')
   end
 
+  def configuration_file_exists?(file)
+    return File.exist?(file)
+  end
 
+  def commit_file(file)
+    git_add(file)
+    git_commit('bland')
+  end
+
+  def git_add(file)
+    puts "Adding #{file} to index"
+    @g.add(file)
+  end
+
+  def git_commit(message)
+    puts "Commiting"
+     @g.commit(message)
+  end
 end
 
 

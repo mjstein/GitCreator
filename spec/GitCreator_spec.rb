@@ -5,7 +5,7 @@ describe GitRecordCreator, "Git Repository" do
 
   let(:git_record){GitRecordCreator.new}
   before(:all) do
-    FileUtils.rm_rf('./configuration') if Dir.exists?('./configuration')
+    FileUtils.rm_rf('./configuration/.git') if Dir.exists?('./configuration/.git')
   end
 
   it "is created when git_repo does not exist" do
@@ -24,17 +24,22 @@ describe GitRecordCreator, "Git Repository" do
 
 
   after(:all) do
-    FileUtils.rm_rf('./configuration') if Dir.exists?('./configuration')
+    FileUtils.rm_rf('./configuration/.git') if Dir.exists?('./configuration/.git')
   end
 
 end
 
 describe GitRecordCreator, "Git commit" do
-  let(:git_record){GitRecordCreator.new.commit_configuration_file}
+  let(:git_record1){GitRecordCreator.new.commit_configuration_file}
   before(:all) do
-    FileUtils.rm_rf('./configuration') if Dir.exists?('./configuration')
+    FileUtils.rm_rf('./configuration/.git') if Dir.exists?('./configuration/.git')
   end
-  it "should commit without error"
+  it "should commit without error" do
+   expect(git_record1).to eq true 
+  end
   it "should commit with a message showing file diffs"
   it "should commit with a message showing time and date"
+  after(:all) do
+    FileUtils.rm_rf('./configuration/.git') if Dir.exists?('./configuration/.git')
+  end
 end
